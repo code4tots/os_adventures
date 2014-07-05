@@ -2,7 +2,7 @@
 *~
 \#*#
 
-# pdfs are large, so ignore them
+# ignore pdf files
 *.pdf
 
 # ignore binary/output files
