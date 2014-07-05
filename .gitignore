@@ -2,9 +2,6 @@
 *~
 \#*#
 
-# ignore pdf files
-*.pdf
-
 # ignore binary/output files
 *.bin
 *.out
