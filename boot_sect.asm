@@ -1,17 +1,19 @@
 
+	[org 0x7c00]
+	
 	mov ah, 0x0e
 
 ;;;  	mov al, the_secret
 ;;;  	int 0x10
 
-;;;  	mov al, [the_secret]
-;;;   	int 0x10
+	;; Now this is the only version that prints the "X"
+  	mov al, [the_secret]
+   	int 0x10
 
-	;; This is the only version that prints the "X"
-	mov bx, the_secret
-	add bx, 0x7c00
-	mov al, [bx]
-	int 0x10
+;;; 	mov bx, the_secret
+;;; 	add bx, 0x7c00
+;;; 	mov al, [bx]
+;;; 	int 0x10
 
 ;;;  	mov al, [0x7c1e]
 ;;;  	int 0x10
