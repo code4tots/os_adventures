@@ -1,5 +1,6 @@
- # ignore all the emacs backup files
+# ignore all the emacs backup files
 *~
+\#*#
 
 # pdfs are large, so ignore them
 *.pdf
