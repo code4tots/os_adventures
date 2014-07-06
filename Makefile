@@ -1,27 +1,26 @@
 C_SOURCES = $(wildcard *.c)
 OBJECTS = $(C_SOURCES:.c=.o)
-DISASSEMBLIES = $(C_SOURCES:.c=.dis)
 
 .PHONY: all run clean
 
-all: boot_sect.bin $(DISASSEMBLIES)
+all: os_image
 
-run: boot_sect.bin bochsrc
+run: all bochsrc
 	bochs -q > /dev/null 2>&1
 
 clean:
 	rm -rf *.bin *.o *.dis
 
-boot_sect.bin: *.asm
+os_image: kernel.bin boot_sect.bin
+	cat boot_sect.bin kernel.bin > os_image
+
+boot_sect.bin: boot_sect.asm
 	nasm boot_sect.asm -f bin -o boot_sect.bin
 
-%.o: %.c
-	gcc -ffreestanding -c $< -o $@
+kernel.o: kernel.c
+	gcc -m32 -ffreestanding -c kernel.c -o kernel.o
 
-%.bin: %.o
-	ld -o $@ -Ttext 0x0 --oformat binary $<
-
-%.dis: %.bin
-	ndisasm -b 32 $< > $@
+kernel.bin: kernel.o
+	ld -o kernel.bin -Ttext 0x1000 kernel.o --oformat binary
 
 
